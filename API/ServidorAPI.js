@@ -1,8 +1,11 @@
 import express from 'express'
 import{rutas} from '../Routes/rutas.js'
+import { conectarConMongo } from '../DataBase/conexion.js'
+
 export class ServidorAPI{
     constructor(){
-        this.app = express() 
+        this.app = express()
+        this.conectarConBd() 
         this.atenderPeticiones()
     }
     // Metodos de la clase ServidorAPI
@@ -16,5 +19,7 @@ export class ServidorAPI{
         this.app.use('/',rutas)
     }
 
-    conectarConBd(){}
+    conectarConBd(){
+        conectarConMongo()
+    }
 }

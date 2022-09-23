@@ -2,22 +2,87 @@ export class ControladorReserva{
     constructor(){}
 
     buscarReservas(request,response){
-        response.send("Buscando reserva desde el controlador")
+        try{
+            response.status(200).json({
+                "mensaje":"Exito al buscar reserva",
+                "datos":"AQUI VAN DATOS DE RESERVA",
+                "estado":true
+            })    
+        }
+        catch(error){
+            response.status(400).json({
+                "mensaje":"Error al buscar reserva "+error,
+                "datos":null,
+                "estado":false
+            })
+        }
     }
     buscarReservaPorId(request,response){
-        response.send("Buscando una reserva desde el controlador por id")
+        try{
+            response.status(200).json({
+                "mensaje":"Exito al buscar reserva por id",
+                "datos":"AQUI VAN DATOS DE RESERVA",
+                "estado":true
+            })    
+        }
+        catch(error){
+            response.status(400).json({
+                "mensaje":"Error al buscar reserva por id "+error,
+                "datos":null,
+                "estado":false
+            })
+        }
     }
 
     registrarReserva(request,response){
-        response.send("Registrando reserva desde el controlador")
+        try{
+            response.status(200).json({
+                "mensaje":"Exito al registrar reserva",
+                "datos":null,
+                "estado":true
+            })    
+        }
+        catch(error){
+            response.status(400).json({
+                "mensaje":"Error en la consulta "+error,
+                "datos":null,
+                "estado":false
+            })
+        }
     }
 
     editarReserva(request,response){
-        response.send("Editando reserva desde el controlador")
+        try{
+            response.status(200).json({
+                "mensaje":"Exito al editar reserva",
+                "datos":null,
+                "estado":true
+            })    
+        }
+        catch(error){
+            response.status(400).json({
+                "mensaje":"Error al editar reserva "+error,
+                "datos":null,
+                "estado":false
+            })
+        }
     }
 
     eliminarReserva(request,response){
-        response.send("Eliminando reserva desde el controlador")
+        try{
+            response.status(200).json({
+                "mensaje":"Exito al eliminar reserva",
+                "datos":null,
+                "estado":true
+            })    
+        }
+        catch(error){
+            response.status(400).json({
+                "mensaje":"Error al eliminar reserva "+error,
+                "datos":null,
+                "estado":false
+            })
+        }
     }
     
 }
