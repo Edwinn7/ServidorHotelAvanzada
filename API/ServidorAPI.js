@@ -5,7 +5,8 @@ import { conectarConMongo } from '../DataBase/conexion.js'
 export class ServidorAPI{
     constructor(){
         this.app = express()
-        this.conectarConBd() 
+        this.conectarConBd()
+        this.activarBody()
         this.atenderPeticiones()
     }
     // Metodos de la clase ServidorAPI
@@ -21,5 +22,9 @@ export class ServidorAPI{
 
     conectarConBd(){
         conectarConMongo()
+    }
+
+    activarBody(){
+        this.app.use(express.json())
     }
 }

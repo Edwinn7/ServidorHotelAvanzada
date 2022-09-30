@@ -18,9 +18,10 @@ export class ControladorReserva{
         }
     }
     buscarReservaPorId(request,response){
+        let idRes=request.params.idReserva // recibe el id de la peticion
         try{
             response.status(200).json({
-                "mensaje":"Exito al buscar reserva por id",
+                "mensaje":"Exito al buscar reserva con id: "+idRes,
                 "datos":"AQUI VAN DATOS DE RESERVA",
                 "estado":true
             })    
@@ -35,10 +36,11 @@ export class ControladorReserva{
     }
 
     registrarReserva(request,response){
+        let datosReserva=request.body
         try{
             response.status(200).json({
                 "mensaje":"Exito al registrar reserva",
-                "datos":null,
+                "datos":datosReserva,
                 "estado":true
             })    
         }
@@ -52,11 +54,13 @@ export class ControladorReserva{
     }
 
     editarReserva(request,response){
+        let id=request.params.idReserva
+        let datosReserva=request.body
+        console.log(id,datosReserva)
         try{
             response.status(200).json({
-                "mensaje":"Exito al editar reserva",
-                "datos":null,
-                "estado":true
+                "mensaje":"Exito al editar reserva: "+id,
+                "datos":datosReserva,
             })    
         }
         catch(error){
@@ -69,6 +73,7 @@ export class ControladorReserva{
     }
 
     eliminarReserva(request,response){
+        let idRes=request.params.idReserva
         try{
             response.status(200).json({
                 "mensaje":"Exito al eliminar reserva",
