@@ -1,12 +1,15 @@
+import { ServicioHabitacion } from "../services/ServicioHabitacion.js"
+
 export class ControladorHabitacion{
     constructor(){}
 
-    buscarHabitaciones(request,response){
+    async buscarHabitaciones(request,response){
+        let objServicioHabitacion = new ServicioHabitacion()
+
         try{
             response.status(200).json({
                 "mensaje":"Exito en la consulta",
-                "datos":"AQUI VAN DATOS DE HABITACIONES",
-                "estado":true
+                "datos":await objServicioHabitacion.buscarHabitaciones(),
             })    
         }
         catch(error){
@@ -17,14 +20,14 @@ export class ControladorHabitacion{
             })
         }
     }
-    buscarHabitacionPorId(request,response){
+    async buscarHabitacionPorId(request,response){
         let id=request.params.idHabitacion // recibe el id de la peticion
+        let objServicioHabitacion=new ServicioHabitacion()
         try{
             response.status(200).json({
                 "mensaje":"Exito al buscar habitacion con id: "+id,
-                "datos":"AQUI VAN DATOS DE HABITACIONES",
-                "estado":true
-            })    
+                "datos":await objServicioHabitacion.buscarHabitacionPorId(id)
+            })
         }
         catch(error){
             response.status(400).json({
@@ -35,31 +38,32 @@ export class ControladorHabitacion{
         }
     }
 
-    registrarHabitacion(request,response){
+    async registrarHabitacion(request,response){
         let datosHabitacion=request.body
+        let objServicioHabitacion=new ServicioHabitacion()
         try{
+            await objServicioHabitacion.agregarHabitacionEnBD(datosHabitacion)
             response.status(200).json({
                 "mensaje":"Exito al registrar habitacion",
                 "datos":null
-            })    
+            })
         }
         catch(error){
             response.status(400).json({
                 "mensaje":"Error en la consulta "+error,
-                "datos":null,
-                "estado":false
+                "datos":null
             })
         }
     }
 
-    editarHabitacion(request,response){
+    async editarHabitacion(request,response){
         let id=request.params.idHabitacion
         let datosHabitacion=request.body
-        console.log(id,datosHabitacion)
+        let objServicioHabitacion = new ServicioHabitacion()
         try{
             response.status(200).json({
-                "mensaje":"Exito al editar: "+id,
-                "datos":datosHabitacion,
+                "mensaje":"Exito al editar habitacion con id: "+id,
+                "datos":await objServicioHabitacion.editarHabitacion(id,datosHabitacion)
             })    
         }
         catch(error){

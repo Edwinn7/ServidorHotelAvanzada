@@ -26,5 +26,4 @@ const EsquemaHabitacion = new Schema({
         type:Number
     }
 });
-
 export const modeloHabitacion=mongoose.model('Habitaciones',EsquemaHabitacion)

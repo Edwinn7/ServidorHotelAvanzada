@@ -2,10 +2,6 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const EsquemaReserva=new Schema({
-    idHabitacion:{
-        required:true,
-        type:String
-    },
     fechaEntrada:{
         required:true,
         type:Date
