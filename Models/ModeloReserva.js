@@ -2,6 +2,10 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const EsquemaReserva=new Schema({
+    idRes:{
+        required:true,
+        type:String
+    },
     fechaEntrada:{
         required:true,
         type:Date
@@ -19,7 +23,7 @@ const EsquemaReserva=new Schema({
         type:Number
     },
     costoReserva:{
-        required:true,
+        required:false,
         type:Number
     }
 })
