@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const EsquemaReserva=new Schema({
-    idRes:{
+    idHabitacion:{
         required:true,
         type:String
     },
