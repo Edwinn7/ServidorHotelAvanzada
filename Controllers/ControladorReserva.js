@@ -41,64 +41,81 @@ export class ControladorReserva {
 
     async registrarReserva(request, response) {
         let objServicioReserva = new ServicioReserva()
-        let datosReserva = request.body
-        // hbtacion
         let objServicioHabitacion = new ServicioHabitacion()
+        let datosReserva = request.body
         let datosHabitacion = request.body
-        // --------------------------------------------------------
-        let id = datosReserva.idHabitacion
-        let numeroMaximoPersonas = parseFloat(datosHabitacion.numeroMaximoPersonas)
+        let idHabitacion = datosHabitacion.idHabitacion
+        let numeroMaximoPersonas = datosHabitacion.numeroMaximoPersonas
         let NumeroPersonas = parseFloat(datosReserva.numeroNinos) + parseFloat(datosReserva.numeroAdultos)
+        let habitacion
         let fechaEntrada = new Date(datosReserva.fechaEntrada).getTime()
         let fechaSalida = new Date(datosReserva.fechaSalida).getTime()
         let dias = (fechaSalida - fechaEntrada) / (1000 * 60 * 60 * 24)
-        let costo = parseFloat(datosReserva.costoReserva) * parseFloat(datosHabitacion.valorNoche)
+        let costo
+        let reserva
         try {
-            /*
-            if (id =! ) {
+            habitacion = await objServicioHabitacion.buscarHabitacionPorId(idHabitacion)
+            if (idHabitacion = ! null) {
+                if (NumeroPersonas <= habitacion.numeroMaximoPersonas) {
+                    if (dias >= 0) {
+                        if (fechaEntrada < fechaSalida) {
+                            costo = dias * habitacion.valorNoche
+                            console.log("costo de reserva " + costo)
+                            datosReserva.costoReserva = costo
+                        }
+                        else {
+                            response.status(400).json({
+                                "mensaje": "Fecha de entrada es mayor a la fecha de salida",
+                                "datos": null
+                            })
+
+                        }
+                    }
+                    else {
+                        response.status(400).json({
+                            "mensaje": "Error no estas en el hotel",
+                            "datos": null
+                        })
+                    }
+                }
+                else {
+                    response.status(400).json({
+                        "mensaje": "Error ha superado el numero maximo de personas para esta habitacion",
+                        "datos": null
+                    })
+                }
+            }
+            else {
                 response.status(400).json({
                     "mensaje": "error id habitacion no exitente ",
                     "datos": null
                 })
-            }
-            else {
-                //await objServicioReserva.agregarReservaEnBD(datosReserva)
-                response.status(200).json({
-                    "mensaje": "Exito al registrar reserva",
-                    "datos": null
-                })
-            }
-            */
-//2
-            console.log("------------------------------")
-            console.log("Costo reserva " + costo)
-            console.log("Numero maximo de personas "+numeroMaximoPersonas)
-            console.log("Personas " + NumeroPersonas)
-            console.log("id " + id)
-            console.log("Dias totales " + dias)
-            // console.log("Dias totales "+dias/(1000*60*60*24))
-            if (NumeroPersonas > 6) {
-                response.status(400).json({
-                    "mensaje": "Error ha superado el numero maximo de personas para esta habitacion ",
-                    "datos": null
-                })
 
             }
-            else {
-                // await objServicioReserva.agregarReservaEnBD(datosReserva)
-                response.status(200).json({
-                    "mensaje": "Exito al registrar reserva",
-                    "datos": null
-                })
-            }
-// 3        
+
+            response.status(200).json({
+                "mensaje": "Exito al registrar reserva",
+                "datos": null
+            })
+
+            //2
+
+            console.log("------------------------------")
+            console.log("habitacion " + habitacion)
+            console.log("id " + idHabitacion)
+            console.log("Personas " + NumeroPersonas)
+            // console.log("Costo reserva " + costo)
+            // console.log("Numero maximo de personas " + numeroMaximoPersonas)
+            console.log("Dias totales " + dias)
+            console.log("------------------------------")
+            await objServicioReserva.agregarReservaEnBD(datosReserva)
+
 
         }
         catch (error) {
             response.status(400).json({
                 "mensaje": "Error en la consulta " + error,
-                "datos": null,
-                "estado": false
+                "datos": null
             })
         }
     }
