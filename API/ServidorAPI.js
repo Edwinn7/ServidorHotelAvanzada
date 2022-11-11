@@ -1,4 +1,5 @@
 import express from 'express'
+import cors from 'cors'
 import{rutas} from '../Routes/rutas.js'
 import { conectarConMongo } from '../DataBase/conexion.js'
 
@@ -25,6 +26,7 @@ export class ServidorAPI{
     }
 
     activarBody(){
+        this.app.use(cors())
         this.app.use(express.json())
     }
 }

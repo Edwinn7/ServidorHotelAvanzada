@@ -100,14 +100,14 @@ export class ControladorReserva {
 
             //2
 
-            console.log("------------------------------")
-            console.log("habitacion " + habitacion)
-            console.log("id " + idHabitacion)
-            console.log("Personas " + NumeroPersonas)
-            // console.log("Costo reserva " + costo)
-            // console.log("Numero maximo de personas " + numeroMaximoPersonas)
-            console.log("Dias totales " + dias)
-            console.log("------------------------------")
+            // console.log("------------------------------")
+            // console.log("habitacion " + habitacion)
+            // console.log("id " + idHabitacion)
+            // console.log("Personas " + NumeroPersonas)
+            // // console.log("Costo reserva " + costo)
+            // // console.log("Numero maximo de personas " + numeroMaximoPersonas)
+            // console.log("Dias totales " + dias)
+            // console.log("------------------------------")
             await objServicioReserva.agregarReservaEnBD(datosReserva)
 
 
